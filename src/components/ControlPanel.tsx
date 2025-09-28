@@ -35,7 +35,7 @@ const ControlPanel = () => {
     return (
         <div className="w-full h-full pt-10">
 
-            <div className="relative flex flex-col max-w-2xl rounded-3xl bg-card/50 backdrop-blur-md p-4 border-border/80 border-2">
+            <div className="relative flex flex-col w-fit rounded-3xl bg-card/50 backdrop-blur-md p-4 border-border/80 border-2">
 
                 <div className="text-[10px] w-full">
                     <h1 className="text-center font-['helvetica-neue-lt-pro'] tracking-tight text-foreground">parameters</h1>
