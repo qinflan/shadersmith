@@ -1,12 +1,6 @@
-import { useState, Fragment } from "react";
+import { Fragment } from "react";
+import { useControlContext } from "@/hooks/useControlContext";
 import { Slider } from "@/components/ui/slider";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -30,16 +24,25 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 
 const ControlPanel = () => {
-    // const [dimension, setDimension] = useState<string>("1920x1080");
-    const [animationSpeed, setAnimationSpeed] = useState<number[]>([50]);
-    const [animationDuration, setAnimationDuration] = useState<number[]>([50]);
-    const [amplitude, setAmplitude] = useState<number[]>([50]);
-    const [grain, setGrain] = useState<number[]>([50]);
-    const [hsva1, setHsva1] = useState({ h: 186, s: 43, v: 100, a: 1 });
-    const [hsva2, setHsva2] = useState({ h: 319, s: 21, v: 100, a: 1 });
-    const [hsva3, setHsva3] = useState({ h: 198, s: 100, v: 93, a: 1 });
-    const [hsva4, setHsva4] = useState({ h: 224, s: 46, v: 55, a: 1 });
-    const [hsva5, setHsva5] = useState({ h: 40, s: 13, v: 100, a: 1 });
+    // update params in context
+    const {
+        amplitude,
+        setAmplitude,
+        animationSpeed,
+        setAnimationSpeed,
+        grain,
+        setGrain,
+        hsva1,
+        setHsva1,
+        hsva2,
+        setHsva2,
+        hsva3,
+        setHsva3,
+        hsva4,
+        setHsva4,
+        hsva5,
+        setHsva5,
+    } = useControlContext();
 
     return (
         <Card className="mt-11">
@@ -47,20 +50,6 @@ const ControlPanel = () => {
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
                 <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">Build your own custom animated gradient art</CardDescription>
             </CardHeader>
-
-            {/* <CardContent>
-                <Select>
-                    <SelectTrigger className="w-[180px] font-['helvetica-neue-lt-pro'] text-[14px] text-primary mb-2 tracking-wide font-normal">
-                        <SelectValue placeholder="Resolution" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="light">1920 x 1080</SelectItem>
-                        <SelectItem value="dark">1080 x 1920</SelectItem>
-                        <SelectItem value="system">2560 x 1080</SelectItem>
-                        <SelectItem value="system">1080 x 1080</SelectItem>
-                    </SelectContent>
-                </Select>
-            </CardContent> */}
 
             <CardContent>
                 <RadioGroup defaultValue="option-one" className="flex gap-6 items-center justify-center mt-4">
@@ -97,15 +86,6 @@ const ControlPanel = () => {
                     <Slider
                         value={animationSpeed}
                         onValueChange={setAnimationSpeed}
-                        step={1}
-                    />
-                </div>
-
-                <div className="flex flex-col">
-                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Animation Duration</p>
-                    <Slider
-                        value={animationDuration}
-                        onValueChange={setAnimationDuration}
                         step={1}
                     />
                 </div>
@@ -238,7 +218,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button className="mt-2 w-full">Export Art</Button>
+                <Button className="mt-2 w-full">Create Code Block</Button>
             </CardFooter>
         </Card>
 

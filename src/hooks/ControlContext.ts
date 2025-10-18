@@ -1,20 +1,30 @@
-import { createContext, useContext, useState } from "react"
+import { createContext } from "react";
+// import type { ControlPanelContextType } from "./ControlProvider";
 
-type HSVA = {h: number, s: number, v: number, a: number};
-
-interface GradientConfig {
-    dimension: string,
-    amplitude: number,
-    animationSpeed: number,
-    animationDuration: number,
-    grain: number,
-    preset: number,
-    colors: HSVA[],
+export type HSVA = {
+  h: number;
+  s: number;
+  v: number;
+  a: number;
 }
 
-const ControlProvider = () => {
+export type ControlPanelContextType = {
+  amplitude: number[];
+  setAmplitude: React.Dispatch<React.SetStateAction<number[]>>;
+  animationSpeed: number[];
+  setAnimationSpeed: React.Dispatch<React.SetStateAction<number[]>>;
+  grain: number[];
+  setGrain: React.Dispatch<React.SetStateAction<number[]>>;
+  hsva1: HSVA;
+  setHsva1: React.Dispatch<React.SetStateAction<HSVA>>;
+  hsva2: HSVA;
+  setHsva2: React.Dispatch<React.SetStateAction<HSVA>>;
+  hsva3: HSVA;
+  setHsva3: React.Dispatch<React.SetStateAction<HSVA>>;
+  hsva4: HSVA;
+  setHsva4: React.Dispatch<React.SetStateAction<HSVA>>;
+  hsva5: HSVA;
+  setHsva5: React.Dispatch<React.SetStateAction<HSVA>>;
+}
 
-
-};
-
-export default ControlProvider
+export const ControlPanelContext = createContext<ControlPanelContextType | undefined>(undefined);
