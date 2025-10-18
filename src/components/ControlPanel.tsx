@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
     Card,
-    CardAction,
     CardContent,
     CardDescription,
     CardFooter,
@@ -31,9 +30,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 
 const ControlPanel = () => {
-
+    const [dimension, setDimension] = useState<string>("1920x1080");
     const [animationSpeed, setAnimationSpeed] = useState<number[]>([50]);
     const [animationDuration, setAnimationDuration] = useState<number[]>([50]);
+    const [amplitude, setAmplitude] = useState<number[]>([50]);
     const [grain, setGrain] = useState<number[]>([50]);
     const [hsva1, setHsva1] = useState({ h: 186, s: 43, v: 100, a: 1 });
     const [hsva2, setHsva2] = useState({ h: 319, s: 21, v: 100, a: 1 });
@@ -84,6 +84,14 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardContent className="flex flex-col gap-3">
+                <div className="flex flex-col">
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Amplitude</p>
+                    <Slider
+                        value={amplitude}
+                        onValueChange={setAmplitude}
+                        step={1}
+                    />
+                </div>
                 <div className="flex flex-col">
                     <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Animation Speed</p>
                     <Slider
