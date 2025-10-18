@@ -10,7 +10,7 @@ function App() {
     <>
       <Navbar />
 
-      <div className="w-full h-[calc(100% - 100px)] mt-[100px] flex justify-center items-center">
+      <div className="w-full h-[calc(100% - 100px)] mt-[100px] flex justify-center  gap-10">
         <ControlPanel />
         <GradientCanvas />
       </div>

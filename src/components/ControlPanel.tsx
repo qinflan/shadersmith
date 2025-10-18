@@ -30,7 +30,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 
 const ControlPanel = () => {
-    const [dimension, setDimension] = useState<string>("1920x1080");
+    // const [dimension, setDimension] = useState<string>("1920x1080");
     const [animationSpeed, setAnimationSpeed] = useState<number[]>([50]);
     const [animationDuration, setAnimationDuration] = useState<number[]>([50]);
     const [amplitude, setAmplitude] = useState<number[]>([50]);
@@ -42,13 +42,13 @@ const ControlPanel = () => {
     const [hsva5, setHsva5] = useState({ h: 40, s: 13, v: 100, a: 1 });
 
     return (
-        <Card>
+        <Card className="mt-11">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
                 <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">Build your own custom animated gradient art</CardDescription>
             </CardHeader>
 
-            <CardContent>
+            {/* <CardContent>
                 <Select>
                     <SelectTrigger className="w-[180px] font-['helvetica-neue-lt-pro'] text-[14px] text-primary mb-2 tracking-wide font-normal">
                         <SelectValue placeholder="Resolution" />
@@ -60,7 +60,7 @@ const ControlPanel = () => {
                         <SelectItem value="system">1080 x 1080</SelectItem>
                     </SelectContent>
                 </Select>
-            </CardContent>
+            </CardContent> */}
 
             <CardContent>
                 <RadioGroup defaultValue="option-one" className="flex gap-6 items-center justify-center mt-4">
