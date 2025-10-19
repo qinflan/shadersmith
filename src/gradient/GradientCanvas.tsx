@@ -1,55 +1,61 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent } from "@/components/ui/card"
-import { useControlContext } from "@/hooks/useControlContext"
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { Suspense } from 'react'
+import vertexShader from './shaders/vertex.glsl'
+import fragmentShader from './shaders/fragment.glsl'
+import { useControlContext } from '@/hooks/useControlContext'
+import { hsvaToRgba } from '@uiw/color-convert'
 
-const GradientCanvas = () => {
-    const {
-        amplitude,
-        animationSpeed,
-        grain,
-        hsva1,
-        hsva2,
-        hsva3,
-        hsva4,
-        hsva5,
-    } = useControlContext()
-
-  return (
-
-    <Tabs defaultValue="gradient" className="flex flex-col items-center w-[50vw]">
-      <TabsList className="grid grid-cols-2">
-        <TabsTrigger value="gradient">preview</TabsTrigger>
-        <TabsTrigger value="sandbox">sandbox mode</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="gradient" className="flex justify-center">
-        <Card className="w-[50vw]">
-          <CardContent className="p-0">
-            <div className="h-96 w-full">
-              {/* render 3d scenes here */}
-              <p>Amplitude: {amplitude[0]}</p>
-              <p>Animation Speed: {animationSpeed[0]}</p>
-              <p>Grain: {grain[0]}</p>
-              <p>Color1: {`h:${hsva1.h} s:${hsva1.s} v:${hsva1.v} a:${hsva1.a}`}</p>
-              <p>Color2: {`h:${hsva2.h} s:${hsva2.s} v:${hsva2.v} a:${hsva2.a}`}</p>
-              <p>Color3: {`h:${hsva3.h} s:${hsva3.s} v:${hsva3.v} a:${hsva3.a}`}</p>
-              <p>Color4: {`h:${hsva4.h} s:${hsva4.s} v:${hsva4.v} a:${hsva4.a}`}</p>
-              <p>Color5: {`h:${hsva5.h} s:${hsva5.s} v:${hsva5.v} a:${hsva5.a}`}</p>
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
-
-      <TabsContent value="sandbox" className="flex justify-center">
-        <Card className="w-[50vw]">
-          <CardContent className="p-0">
-            <div className="h-96 w-full" />
-            {/* render sandbox here */}
-          </CardContent>
-        </Card>
-      </TabsContent>
-    </Tabs>
-  )
+type GradientCanvasProps = {
+  mode: 'gradient' | 'sandbox'
 }
 
-export default GradientCanvas
+export default function GradientCanvas({ mode }: GradientCanvasProps) {
+
+    const {
+        amplitude, 
+        animationSpeed, 
+        grain, 
+        hsva1, 
+        hsva2, 
+        hsva3, 
+        hsva4, 
+        hsva5 
+    } = useControlContext()
+
+    const color1 = (() => { const { r, g, b, a } = hsvaToRgba(hsva1); return [r/255, g/255, b/255, a] })()
+    const color2 = (() => { const { r, g, b, a } = hsvaToRgba(hsva2); return [r/255, g/255, b/255, a] })()
+    const color3 = (() => { const { r, g, b, a } = hsvaToRgba(hsva3); return [r/255, g/255, b/255, a] })()
+    const color4 = (() => { const { r, g, b, a } = hsvaToRgba(hsva4); return [r/255, g/255, b/255, a] })()
+    const color5 = (() => { const { r, g, b, a } = hsvaToRgba(hsva5); return [r/255, g/255, b/255, a] })()
+    
+
+    return (
+        <Canvas className="w-full h-full" camera={{ position: [0, 0, 15], fov: 45 }}>
+            <Suspense fallback={null}> 
+                <ambientLight intensity={0.3} />
+                <directionalLight position={[5, 5, 5]} intensity={1.2} />
+                {mode === 'sandbox' && <gridHelper args={[100, 50, 0x888888, 0x444444]} />}
+
+                <mesh>
+                    <planeGeometry args={[50, 50, 300, 300]} />
+                    <shaderMaterial
+                        vertexShader={vertexShader}
+                        fragmentShader={fragmentShader}
+                        uniforms={{
+                        uAmplitude: { value: amplitude },
+                        uAnimationSpeed: { value: animationSpeed },
+                        uColor1: { value: color1 },
+                        uColor2: { value: color2 },
+                        uColor3: { value: color3 },
+                        uColor4: { value: color4 },
+                        uColor5: { value: color5 },
+                        uGrain: { value: grain }
+                        }}
+                    />
+                </mesh>
+            {mode === 'sandbox' && <OrbitControls enablePan enableZoom enableRotate />}
+            </Suspense>
+        </Canvas>
+  )
+}

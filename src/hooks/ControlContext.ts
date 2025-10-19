@@ -9,6 +9,8 @@ export type HSVA = {
 }
 
 export type ControlPanelContextType = {
+  isSandboxMode: boolean;
+  setIsSandboxMode: React.Dispatch<React.SetStateAction<boolean>>;
   amplitude: number[];
   setAmplitude: React.Dispatch<React.SetStateAction<number[]>>;
   animationSpeed: number[];

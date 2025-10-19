@@ -45,7 +45,7 @@ const ControlPanel = () => {
     } = useControlContext();
 
     return (
-        <Card className="mt-11">
+        <Card className="mt-13">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
                 <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">Build your own custom animated gradient art</CardDescription>

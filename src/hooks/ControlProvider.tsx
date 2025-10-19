@@ -5,6 +5,7 @@ import type { HSVA } from "./ControlContext";
 export type { ControlPanelContextType } from "./ControlContext";
 
 export const ControlPanelProvider = ({ children }: { children: ReactNode }) => {
+  const [isSandboxMode, setIsSandboxMode] = useState<boolean>(false);
   const [amplitude, setAmplitude] = useState<number[]>([50]);
   const [animationSpeed, setAnimationSpeed] = useState<number[]>([50]);
   const [grain, setGrain] = useState<number[]>([50]);
@@ -18,6 +19,8 @@ export const ControlPanelProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ControlPanelContext.Provider
       value={{
+        isSandboxMode,
+        setIsSandboxMode,
         amplitude,
         setAmplitude,
         animationSpeed,
