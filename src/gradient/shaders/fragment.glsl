@@ -1,9 +1,13 @@
 uniform vec4 uColors[5]; // array of colors
 uniform float uGrain;
 
+varying float vHeight; // passed z displacement for vertices from vertex shader
+
 void main() {
-    float t = gl_FragCoord.y / 500.0; // normalize Y coord
+    float t = (vHeight + 10.0) / 20.0;
+    t = clamp(t, 0.0, 1.0);
     vec4 color;
+
 
     if (t < 0.25) {
         float f = t / 0.25;

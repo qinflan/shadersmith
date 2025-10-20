@@ -1,20 +1,34 @@
 import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { Suspense } from 'react'
+import type { OrbitControlsProps } from '@react-three/drei'
+
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
-import { useControlContext } from '@/hooks/useControlContext'
+import { useControls } from '@/hooks/ControlStore'
 import { hsvaToRgba } from '@uiw/color-convert'
 import * as THREE from 'three'
 
-type GradientCanvasProps = {
-    mode: 'gradient' | 'sandbox'
-}
-
 function GradientMesh() {
-    // get control params from context
-    const {
+
+    // refs
+    const meshRef = useRef<THREE.Mesh>(null!);
+    const materialRef = useRef<THREE.ShaderMaterial>(null!);
+
+    const colorVectors = useRef<THREE.Vector4[]>([
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+    ]);
+
+    // this will updates shaders based on changes to our material ref
+    useFrame(( state ) => {
+        const mat = materialRef.current
+        if (!materialRef.current) return
+
+        const {
         amplitude,
         animationSpeed,
         grain,
@@ -22,26 +36,13 @@ function GradientMesh() {
         hsva2,
         hsva3,
         hsva4,
-        hsva5
-    } = useControlContext()
+        hsva5,
+        } = useControls.getState()
 
-    // refs
-    const materialRef = useRef<THREE.ShaderMaterial>(null!);
-    const colorVectors = useRef([
-        new THREE.Vector4(),
-        new THREE.Vector4(),
-        new THREE.Vector4(),
-        new THREE.Vector4(),
-        new THREE.Vector4()
-    ]);
-
-    // this will updates shaders based on changes to our material ref
-    useFrame(() => {
-        if (!materialRef.current) return
-
-        materialRef.current.uniforms.uAmplitude.value = amplitude
-        materialRef.current.uniforms.uAnimationSpeed.value = animationSpeed
-        materialRef.current.uniforms.uGrain.value = grain
+        mat.uniforms.uTime.value = state.clock.elapsedTime;
+        mat.uniforms.uAmplitude.value = amplitude
+        mat.uniforms.uAnimationSpeed.value = animationSpeed
+        mat.uniforms.uGrain.value = grain
 
         const hsvas = [hsva1, hsva2, hsva3, hsva4, hsva5];
 
@@ -49,43 +50,53 @@ function GradientMesh() {
         hsvas.forEach((hsva, i) => {
             const { r, g, b, a } = hsvaToRgba(hsva);
             colorVectors.current[i].set(r / 255, g / 255, b / 255, a);
-            materialRef.current.uniforms.uColors.value[i] = colorVectors.current[i];
+            mat.uniforms.uColors.value[i] = colorVectors.current[i];
         })
     })
 
     // return 3D gradient mesh
     return (
-        <mesh>
+        <mesh ref={meshRef} receiveShadow castShadow>
             <planeGeometry args={[50, 50, 300, 300]} />
             <shaderMaterial
                 ref={materialRef}
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
                 uniforms={{
-                    uAmplitude: { value: amplitude },
-                    uAnimationSpeed: { value: animationSpeed },
-                    uColors: { value: colorVectors },
-                    uGrain: { value: grain }
+                    uTime: { value: 0 },
+                    uAmplitude: { value: useControls.getState().amplitude },
+                    uAnimationSpeed: { value: useControls.getState().animationSpeed },
+                    uColors: { value: colorVectors.current },
+                    uGrain: { value: useControls.getState().grain }
                 }}
             />
         </mesh>
     )
 }
 
-export default function GradientCanvas({ mode }: GradientCanvasProps) {
+export function GradientScene() {
+    const isSandboxMode = useControls.getState().isSandboxMode;
+    const orbitRef = useRef<OrbitControlsProps>(null)
+    const gridRef = useRef<THREE.GridHelper>(null!)
+
+    useFrame(() => {
+        const isSandbox = useControls.getState().isSandboxMode
+
+        if (orbitRef.current) {
+        orbitRef.current.enabled = isSandbox
+        }
+        if (gridRef.current) {
+        gridRef.current.visible = isSandbox
+        }
+    })
 
     return (
-        <Canvas className="w-full h-full" camera={{ position: [0, 0, 15], fov: 45 }}>
-            <Suspense fallback={null}>
-                <ambientLight intensity={0.3} />
-                <directionalLight position={[5, 5, 5]} intensity={1.2} />
-
-                {/* on sandbox mode toggle orbit controls and render gridlines */}
-                {mode === 'sandbox' && <gridHelper args={[100, 50, 0x888888, 0x444444]} />}
-                {mode === 'sandbox' && <OrbitControls enablePan enableZoom enableRotate />}
-
-                <GradientMesh />
-            </Suspense>
-        </Canvas>
+        <>
+            <ambientLight intensity={10} />
+            <directionalLight position={[10, 10, 10]} intensity={1.2} castShadow shadow-mapSize={[2048, 2048]} />
+            <GradientMesh />
+            <OrbitControls enabled={isSandboxMode}/>
+            <gridHelper args={[100, 50, 0x888888, 0x444444]} visible={isSandboxMode} />
+        </>
     )
 }

@@ -1,5 +1,4 @@
 import { createContext } from "react";
-// import type { ControlPanelContextType } from "./ControlProvider";
 
 export type HSVA = {
   h: number;
@@ -8,10 +7,10 @@ export type HSVA = {
   a: number;
 }
 
-export type ControlPanelContextType = {
+export type ControlPanelStateType = {
   isSandboxMode: boolean;
   setIsSandboxMode: React.Dispatch<React.SetStateAction<boolean>>;
-  amplitude: number[];
+  amplitude: [];
   setAmplitude: React.Dispatch<React.SetStateAction<number[]>>;
   animationSpeed: number[];
   setAnimationSpeed: React.Dispatch<React.SetStateAction<number[]>>;
@@ -29,4 +28,4 @@ export type ControlPanelContextType = {
   setHsva5: React.Dispatch<React.SetStateAction<HSVA>>;
 }
 
-export const ControlPanelContext = createContext<ControlPanelContextType | undefined>(undefined);
+export const ControlPanelContext = createContext<ControlPanelStateType | undefined>(undefined);

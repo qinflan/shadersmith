@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import { useControlContext } from "@/hooks/useControlContext";
+// import { useControlContext } from "@/hooks/useControlContext";
+import { useControls } from "@/hooks/ControlStore";
 import { Slider } from "@/components/ui/slider";
 import {
     DropdownMenu,
@@ -24,7 +25,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
 
 const ControlPanel = () => {
-    // update params in context
     const {
         amplitude,
         setAmplitude,
@@ -41,8 +41,8 @@ const ControlPanel = () => {
         hsva4,
         setHsva4,
         hsva5,
-        setHsva5,
-    } = useControlContext();
+        setHsva5
+    } = useControls();
 
     return (
         <Card className="mt-13">
@@ -76,25 +76,27 @@ const ControlPanel = () => {
                 <div className="flex flex-col">
                     <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Amplitude</p>
                     <Slider
-                        value={amplitude}
-                        onValueChange={setAmplitude}
+                        value={[amplitude]}
+                        onValueChange={(val) => setAmplitude(val[0])}
                         step={1}
                     />
                 </div>
                 <div className="flex flex-col">
                     <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Animation Speed</p>
                     <Slider
-                        value={animationSpeed}
-                        onValueChange={setAnimationSpeed}
-                        step={1}
+                        value={[animationSpeed]}
+                        onValueChange={(val) => setAnimationSpeed(val[0])}
+                        min={0}
+                        max={1}
+                        step={0.05}
                     />
                 </div>
 
                 <div className="flex flex-col">
                     <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Grain</p>
                     <Slider
-                        value={grain}
-                        onValueChange={setGrain}
+                        value={[grain]}
+                        onValueChange={(val) => setGrain(val[0])}
                         step={1}
                     />
                 </div>

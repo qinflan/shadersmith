@@ -1,11 +1,13 @@
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { useControlContext } from "@/hooks/useControlContext"
-import GradientCanvas from "./GradientCanvas"
+import { useControls } from "@/hooks/ControlStore"
+import { Canvas } from "@react-three/fiber"
+import { Suspense } from "react"
+import { GradientScene } from "./GradientCanvas"
 
 const GradientCard = () => {
-    const { isSandboxMode, setIsSandboxMode } = useControlContext()
+    const { isSandboxMode, setIsSandboxMode } = useControls.getState()
 
   return (
     <div className="flex flex-col gap-4 items-center">
@@ -26,9 +28,11 @@ const GradientCard = () => {
 
         <Card className="w-[50vw] h-full p-0 overflow-hidden">
           <CardContent className="w-full h-full p-0">
-            <div className="w-full h-full">
-              <GradientCanvas mode={isSandboxMode ? "sandbox" : "gradient"} />
-            </div>
+                    <Canvas className="w-full h-full" shadows camera={{ position: [0, 0, 50], fov: 30 }}>
+                        <Suspense fallback={null}>
+                            <GradientScene />
+                        </Suspense>
+                    </Canvas>
           </CardContent>
         </Card>
     </div>
