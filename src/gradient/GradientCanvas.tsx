@@ -10,8 +10,10 @@ import { hsvaToRgba } from '@uiw/color-convert'
 import * as THREE from 'three'
 
 function GradientMesh() {
+    const controlState = useControls.getState();
     const meshRef = useRef<THREE.Mesh>(null!);
     const materialRef = useRef<THREE.ShaderMaterial>(null!);
+    
 
     const colorVectors = useRef<THREE.Vector4[]>([
         new THREE.Vector4(),
@@ -20,6 +22,22 @@ function GradientMesh() {
         new THREE.Vector4(),
         new THREE.Vector4(),
     ]);
+
+    const initialColorVectors = colorVectors.current.map((v, i) => {
+
+    // @ts-expect-error due to looking up index as a string and not type, but works
+    const hsva = controlState[`hsva${i + 1}`];
+    const { r, g, b, a } = hsvaToRgba(hsva);
+    return new THREE.Vector4(r / 255, g / 255, b / 255, a);
+    });
+
+    const uniformsRef = useRef({
+        uTime: { value: 0 },
+        uAmplitude: { value: controlState.amplitude },
+        uAnimationSpeed: { value: controlState.animationSpeed },
+        uColors: { value: initialColorVectors },
+        uGrain: { value: controlState.grain },
+    });
 
     // this will updates shaders based on changes to our material ref
     useFrame(( state ) => {
@@ -33,6 +51,7 @@ function GradientMesh() {
             hsva4,
             hsva5,
         } = useControls.getState()
+
 
         const mat = materialRef.current
         if (!mat) return
@@ -61,13 +80,7 @@ function GradientMesh() {
                 ref={materialRef}
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
-                uniforms={{
-                    uTime: { value: 0 },
-                    uAmplitude: { value: useControls.getState().amplitude },
-                    uAnimationSpeed: { value: useControls.getState().animationSpeed },
-                    uColors: { value: colorVectors.current },
-                    uGrain: { value: useControls.getState().grain }
-                }}
+                uniforms={uniformsRef.current}
             />
         </mesh>
     )

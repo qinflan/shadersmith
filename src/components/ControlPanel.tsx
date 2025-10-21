@@ -45,24 +45,24 @@ const ControlPanel = () => {
     } = useControls();
 
     return (
-        <Card className="mt-13">
+        <Card className="mt-13 min-w-[300px]">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
-                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own custom animated gradient art</CardDescription>
+                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own customized 3D gradient art in real time.</CardDescription>
             </CardHeader>
 
             <CardContent>
-                <RadioGroup defaultValue="option-one" className="flex gap-6 items-center justify-center mt-4">
+                <RadioGroup defaultValue="option-one" className="flex gap-6 items-center">
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-one">simplex noise</Label>
+                        <Label htmlFor="option-one">valley</Label>
                         <RadioGroupItem value="option-one" id="option-one" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-two">perlin noise</Label>
+                        <Label htmlFor="option-two">liquid</Label>
                         <RadioGroupItem value="option-two" id="option-two" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-three">sine noise</Label>
+                        <Label htmlFor="option-three">sine</Label>
                         <RadioGroupItem value="option-three" id="option-three" />
                     </div>
                 </RadioGroup>
