@@ -89,6 +89,15 @@ const ControlPanel = () => {
                 </div>
 
                 <div className="flex flex-col">
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Amplitude</p>
+                    <Slider
+                        value={amplitude}
+                        onValueChange={setAmplitude}
+                        step={1}
+                    />
+                </div>
+
+                <div className="flex flex-col">
                     <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Grain</p>
                     <Slider
                         value={[grain]}
