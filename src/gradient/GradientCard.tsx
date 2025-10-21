@@ -28,7 +28,10 @@ const GradientCard = () => {
 
         <Card className="w-[50vw] h-full p-0 overflow-hidden">
           <CardContent className="w-full h-full p-0">
-                    <Canvas className="w-full h-full" key={isSandboxMode ? "sandbox" : "preview"} camera={{ position: [0, 0, 50], fov: 20 }}>
+                    <Canvas className="w-full h-full" 
+                      key={isSandboxMode ? "sandbox" : "preview"} 
+                      camera={isSandboxMode ? { position: [-40, 20, 50], fov: 50 } : { position: [0, 20, 50], fov: 20 }}
+                    >
                         <Suspense fallback={null}>
                             <GradientScene sandbox={isSandboxMode}/>
                         </Suspense>
