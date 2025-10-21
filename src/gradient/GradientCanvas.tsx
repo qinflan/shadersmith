@@ -10,8 +10,6 @@ import { hsvaToRgba } from '@uiw/color-convert'
 import * as THREE from 'three'
 
 function GradientMesh() {
-
-    // refs
     const meshRef = useRef<THREE.Mesh>(null!);
     const materialRef = useRef<THREE.ShaderMaterial>(null!);
 
@@ -25,21 +23,22 @@ function GradientMesh() {
 
     // this will updates shaders based on changes to our material ref
     useFrame(( state ) => {
-        const mat = materialRef.current
-        if (!materialRef.current) return
-
         const {
-        amplitude,
-        animationSpeed,
-        grain,
-        hsva1,
-        hsva2,
-        hsva3,
-        hsva4,
-        hsva5,
+            amplitude,
+            animationSpeed,
+            grain,
+            hsva1,
+            hsva2,
+            hsva3,
+            hsva4,
+            hsva5,
         } = useControls.getState()
 
+        const mat = materialRef.current
+        if (!mat) return
+ 
         mat.uniforms.uTime.value = state.clock.elapsedTime;
+
         mat.uniforms.uAmplitude.value = amplitude
         mat.uniforms.uAnimationSpeed.value = animationSpeed
         mat.uniforms.uGrain.value = grain
@@ -56,7 +55,7 @@ function GradientMesh() {
 
     // return 3D gradient mesh
     return (
-        <mesh ref={meshRef} receiveShadow castShadow>
+        <mesh ref={meshRef}>
             <planeGeometry args={[50, 50, 300, 300]} />
             <shaderMaterial
                 ref={materialRef}
@@ -74,8 +73,7 @@ function GradientMesh() {
     )
 }
 
-export function GradientScene() {
-    const isSandboxMode = useControls.getState().isSandboxMode;
+export function GradientScene({ sandbox }: {sandbox: boolean}) {
     const orbitRef = useRef<OrbitControlsProps>(null)
     const gridRef = useRef<THREE.GridHelper>(null!)
 
@@ -95,8 +93,8 @@ export function GradientScene() {
             <ambientLight intensity={10} />
             <directionalLight position={[10, 10, 10]} intensity={1.2} castShadow shadow-mapSize={[2048, 2048]} />
             <GradientMesh />
-            <OrbitControls enabled={isSandboxMode}/>
-            <gridHelper args={[100, 50, 0x888888, 0x444444]} visible={isSandboxMode} />
+            <OrbitControls enabled={sandbox}/>
+            <gridHelper args={[400, 10, 0xaaaaaa, 0xbbbbbb]} visible={sandbox} />
         </>
     )
 }

@@ -48,26 +48,22 @@ const ControlPanel = () => {
         <Card className="mt-13">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
-                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">Build your own custom animated gradient art</CardDescription>
+                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own custom animated gradient art</CardDescription>
             </CardHeader>
 
             <CardContent>
                 <RadioGroup defaultValue="option-one" className="flex gap-6 items-center justify-center mt-4">
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-one">Preset 1</Label>
+                        <Label htmlFor="option-one">simplex noise</Label>
                         <RadioGroupItem value="option-one" id="option-one" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-two">Preset 2</Label>
+                        <Label htmlFor="option-two">perlin noise</Label>
                         <RadioGroupItem value="option-two" id="option-two" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-three">Preset 3</Label>
+                        <Label htmlFor="option-three">sine noise</Label>
                         <RadioGroupItem value="option-three" id="option-three" />
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-four">Preset 4</Label>
-                        <RadioGroupItem value="option-four" id="option-four" />
                     </div>
                 </RadioGroup>
             </CardContent>
@@ -220,7 +216,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button className="mt-2 w-full">Create Code Block</Button>
+                <Button className="mt-2 w-full">create code block</Button>
             </CardFooter>
         </Card>
 
