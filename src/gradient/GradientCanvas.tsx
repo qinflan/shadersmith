@@ -1,10 +1,113 @@
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import type { OrbitControlsProps } from '@react-three/drei'
 
-const GradientCanvas = () => {
-  return (
-    <div>
-        
-    </div>
-  )
+import vertexShader from './shaders/vertex.glsl'
+import fragmentShader from './shaders/fragment.glsl'
+import { useControls } from '@/hooks/ControlStore'
+import { hsvaToRgba } from '@uiw/color-convert'
+import * as THREE from 'three'
+
+function GradientMesh() {
+    const controlState = useControls.getState();
+    const meshRef = useRef<THREE.Mesh>(null!);
+    const materialRef = useRef<THREE.ShaderMaterial>(null!);
+    
+
+    const colorVectors = useRef<THREE.Vector4[]>([
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+        new THREE.Vector4(),
+    ]);
+
+    const initialColorVectors = colorVectors.current.map((v, i) => {
+
+    // @ts-expect-error due to looking up index as a string and not type, but works
+    const hsva = controlState[`hsva${i + 1}`];
+    const { r, g, b, a } = hsvaToRgba(hsva);
+    return new THREE.Vector4(r / 255, g / 255, b / 255, a);
+    });
+
+    const uniformsRef = useRef({
+        uTime: { value: 0 },
+        uAmplitude: { value: controlState.amplitude },
+        uAnimationSpeed: { value: controlState.animationSpeed },
+        uColors: { value: initialColorVectors },
+        uGrain: { value: controlState.grain },
+    });
+
+    // this will updates shaders based on changes to our material ref
+    useFrame(( state ) => {
+        const {
+            amplitude,
+            animationSpeed,
+            grain,
+            hsva1,
+            hsva2,
+            hsva3,
+            hsva4,
+            hsva5,
+        } = useControls.getState()
+
+
+        const mat = materialRef.current
+        if (!mat) return
+ 
+        mat.uniforms.uTime.value = state.clock.elapsedTime;
+
+        mat.uniforms.uAmplitude.value = amplitude
+        mat.uniforms.uAnimationSpeed.value = animationSpeed
+        mat.uniforms.uGrain.value = grain
+
+        const hsvas = [hsva1, hsva2, hsva3, hsva4, hsva5];
+
+        // convert hsva from pickers to rgba for shaders, divide by 255 to get float
+        hsvas.forEach((hsva, i) => {
+            const { r, g, b, a } = hsvaToRgba(hsva);
+            colorVectors.current[i].set(r / 255, g / 255, b / 255, a);
+            mat.uniforms.uColors.value[i] = colorVectors.current[i];
+        })
+    })
+
+    // return 3D gradient mesh
+    return (
+        <mesh ref={meshRef}>
+            <planeGeometry args={[50, 50, 300, 300]} />
+            <shaderMaterial
+                ref={materialRef}
+                vertexShader={vertexShader}
+                fragmentShader={fragmentShader}
+                uniforms={uniformsRef.current}
+            />
+        </mesh>
+    )
 }
 
-export default GradientCanvas
+export function GradientScene({ sandbox }: {sandbox: boolean}) {
+    const orbitRef = useRef<OrbitControlsProps>(null)
+    const gridRef = useRef<THREE.GridHelper>(null!)
+
+    useFrame(() => {
+        const isSandbox = useControls.getState().isSandboxMode
+
+        if (orbitRef.current) {
+        orbitRef.current.enabled = isSandbox
+        }
+        if (gridRef.current) {
+        gridRef.current.visible = isSandbox
+        }
+    })
+
+    return (
+        <>
+            <ambientLight intensity={10} />
+            <directionalLight position={[10, 10, 10]} intensity={1.2} castShadow shadow-mapSize={[2048, 2048]} />
+            <GradientMesh />
+            <OrbitControls enabled={sandbox}/>
+            <gridHelper args={[400, 10, 0xaaaaaa, 0xbbbbbb]} visible={sandbox} />
+        </>
+    )
+}
