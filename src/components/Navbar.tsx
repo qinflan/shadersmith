@@ -3,11 +3,11 @@ import { ModeToggle } from "./ThemeToggle"
 
 const Navbar = () => {
   return (
-    <div className="w-full ml-4 mt-4 fixed top-0 p-2 flex text-xs h-[100px] items-center gap-6">
-        <h1 className="font-['articulat-cf'] font-bold tracking-tight text-foreground">shadersmith</h1>
-        <div className="fixed right-[4vw]">
+    <div className="w-full flex items-center justify-center fixed top-0 text-[8px] border-b-1">
+      <div className="flex w-full items-center justify-center p-4 ml-3 mr-3">
+        <h1 className="relative text-left w-full font-['articulat-cf'] font-bold tracking-tight text-foreground select-none">shadersmith</h1>
           <ModeToggle/>
-        </div>
+      </div>
     </div>
   )
 }

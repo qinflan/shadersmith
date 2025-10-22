@@ -7,13 +7,13 @@ import GradientCard from './gradient/GradientCard'
 function App() {
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       <Navbar />
-        <div className="w-full h-[calc(100% - 100px)] mt-[100px] flex justify-center  gap-10">
+        <div className="flex mt-[150px] justify-center gap-10">
           <ControlPanel />
           <GradientCard />
-        </div>
-    </>
+      </div>
+    </div>
   )
 }
 

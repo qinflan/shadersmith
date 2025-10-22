@@ -45,7 +45,7 @@ const ControlPanel = () => {
     } = useControls();
 
     return (
-        <Card className="mt-13 min-w-[300px]">
+        <Card className="min-w-[275px] max-h-[485px]">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
                 <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own customized 3D gradient art in real time.</CardDescription>
@@ -216,7 +216,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button className="mt-2 w-full">create code block</Button>
+                <Button className="mt-2 w-full"> Create Code Block</Button>
             </CardFooter>
         </Card>
 
