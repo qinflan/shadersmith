@@ -1,8 +1,8 @@
 uniform float uTime;
 uniform float uAmplitude;
 uniform float uAnimationSpeed;
-
 varying float vHeight;
+
 
 //	simplex 3D noise
 //	credit to Ian McEwan, Stefan Gustavson (https://github.com/stegu/webgl-noise)
@@ -80,16 +80,37 @@ float snoise(vec3 v){
 }
 
 
+
+float sinenoise(vec4 x, vec2 uv, float uAmplitude, float uAnimationSpeed) {
+    float a = 0.0;
+    float d = -x.w * uAnimationSpeed;
+
+    for (int i = 0; i < N; i++) {
+        a += cos(float(i) - d - a * uv.x);
+        d += sin(uv.y * float(i) + a);
+    }
+
+    d += x.w * uAnimationSpeed;
+
+    float z = cos(uv.x * d + uv.y * a) * uAmplitude;
+
+    // subtle per-vertex sine + simplex noise
+    for (int i = 0; i < 4; i++) {
+        z += sin(x.x*0.5 + x.y*0.3 + x.z*0.1 + x.w*0.2*float(i));
+        z += 0.1 * snoise(x.xyz*0.5 + float(i)*0.1);
+    }
+
+    return z;
+}
+
 void main() {
-    vec3 pos = position;
+    vec2 uv = position.xy;
 
-    // sample simplex noise using the vertex position and time
-    float noise = snoise(vec3(pos.x * 0.1, pos.y * 0.1, uTime * uAnimationSpeed));
+    float displacement = sinenoise(vec4(position, uTime), uv, uAmplitude, uAnimationSpeed);
 
-    // displace vertex along z using noise
-    pos.z += noise * uAmplitude;
+    vec3 newPosition = position;
+    newPosition.z += displacement;
+    vHeight = displacement;
 
-    vHeight = pos.z;
-
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 }

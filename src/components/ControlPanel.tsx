@@ -32,6 +32,8 @@ const ControlPanel = () => {
         setAnimationSpeed,
         grain,
         setGrain,
+        preset,
+        setPreset,
         hsva1,
         setHsva1,
         hsva2,
@@ -52,18 +54,18 @@ const ControlPanel = () => {
             </CardHeader>
 
             <CardContent>
-                <RadioGroup defaultValue="option-one" className="flex gap-6 items-center">
+                <RadioGroup defaultValue={preset} className="flex gap-6 items-center" onValueChange={(value) => setPreset(value)}>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-one">valley</Label>
-                        <RadioGroupItem value="option-one" id="option-one" />
+                        <Label htmlFor="preset-1">valley</Label>
+                        <RadioGroupItem value="valley" id="preset-1" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-two">liquid</Label>
-                        <RadioGroupItem value="option-two" id="option-two" />
+                        <Label htmlFor="preset-2">liquid</Label>
+                        <RadioGroupItem value="liquid" id="preset-3" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="option-three">sine</Label>
-                        <RadioGroupItem value="option-three" id="option-three" />
+                        <Label htmlFor="preset-3">sine</Label>
+                        <RadioGroupItem value="sine" id="preset-3" />
                     </div>
                 </RadioGroup>
             </CardContent>

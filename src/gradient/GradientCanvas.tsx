@@ -4,6 +4,7 @@ import { OrbitControls } from '@react-three/drei'
 import type { OrbitControlsProps } from '@react-three/drei'
 
 import vertexShader from './shaders/vertex.glsl'
+import sineVertexShader from './shaders/sine-vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 import { useControls } from '@/hooks/ControlStore'
 import { hsvaToRgba } from '@uiw/color-convert'
@@ -11,6 +12,7 @@ import * as THREE from 'three'
 
 function GradientMesh() {
     const controlState = useControls.getState();
+    const presetOption = controlState.preset;
     const meshRef = useRef<THREE.Mesh>(null!);
     const materialRef = useRef<THREE.ShaderMaterial>(null!);
     
@@ -78,7 +80,7 @@ function GradientMesh() {
             <planeGeometry args={[50, 50, 300, 300]} />
             <shaderMaterial
                 ref={materialRef}
-                vertexShader={vertexShader}
+                vertexShader={presetOption === "valley" ? vertexShader : sineVertexShader}
                 fragmentShader={fragmentShader}
                 uniforms={uniformsRef.current}
             />

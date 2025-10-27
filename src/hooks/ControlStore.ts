@@ -17,6 +17,7 @@ interface ControlState {
     hsva3: HSVA;
     hsva4: HSVA;
     hsva5: HSVA;
+    preset: string,
 
     setIsSandboxMode: (v: boolean) => void;
     setAmplitude: (v: number) => void;
@@ -27,6 +28,7 @@ interface ControlState {
     setHsva3: (v: HSVA) => void;
     setHsva4: (v: HSVA) => void;
     setHsva5: (v: HSVA) => void;
+    setPreset: (v: string) => void;
 }
 
 export const useControls = create<ControlState>((set) => ({
@@ -34,12 +36,12 @@ export const useControls = create<ControlState>((set) => ({
     amplitude: 20,
     animationSpeed: 0.5,
     grain: 50,
-
     hsva1: { h: 186, s: 43, v: 100, a: 1 },
     hsva2: { h: 319, s: 21, v: 100, a: 1 },
     hsva3: { h: 198, s: 100, v: 93, a: 1 },
     hsva4: { h: 224, s: 46, v: 55, a: 1 },
     hsva5: { h: 40, s: 13, v: 100, a: 1 },
+    preset: "valley",
 
     setIsSandboxMode: (v) => set({ isSandboxMode: v }),
     setAmplitude: (v) => set({ amplitude: v }),
@@ -50,5 +52,5 @@ export const useControls = create<ControlState>((set) => ({
     setHsva3: (v) => set({ hsva3: v }),
     setHsva4: (v) => set({ hsva4: v }),
     setHsva5: (v) => set({ hsva5: v }),
-
+    setPreset: (v) => set({preset: v}),
 }));
