@@ -1,7 +1,6 @@
 uniform float uTime;
 uniform float uAmplitude;
 uniform float uAnimationSpeed;
-
 varying float vHeight;
 
 //	simplex 3D noise
@@ -86,9 +85,10 @@ void main() {
     // sample simplex noise using the vertex position and time
     float noise = snoise(vec3(pos.x * 0.1, pos.y * 0.1, uTime * uAnimationSpeed));
 
-    // displace vertex along z using noise
+    // displace vertex position along z using noise
     pos.z += noise * uAmplitude;
 
+    // set vertex height
     vHeight = pos.z;
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
