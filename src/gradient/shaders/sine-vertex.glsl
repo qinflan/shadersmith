@@ -8,13 +8,14 @@ float sinenoise(vec4 x, vec2 uv, float uAmplitude, float uAnimationSpeed) {
   float a = 0.0;
   float d = -uTime * uAnimationSpeed;
 
-  // offset vertex position to keep unique procedural effect
-  float phase = position.x * 0.3 + position.y * 0.3;
+  // create offset phase for looping
+  float r = length(uv) * 0.3 * uAmplitude;
+  float phase = (position.x * 0.2 + position.y * 0.3) + r * 0.3;
 
-  // loop angle creation to generate unique twisting ridges 
+  // loop angle creation to generate uniquely twisting ridges 
   for (float i = 0.0; i < n; i++) {
       a += cos(float(i) - d - a * position.x * 0.5 + phase);
-      d += sin(position.y * float(i) * 0.5 + a + phase);
+      d += sin(float(i) * 0.5 + phase);
   }
 
   // calculate displacement based on amplitude uniform
@@ -26,7 +27,8 @@ float sinenoise(vec4 x, vec2 uv, float uAmplitude, float uAnimationSpeed) {
 void main() {
     vec2 uv = position.xy;
 
-    float displacement = sinenoise(vec4(position, uTime), uv, uAmplitude, uAnimationSpeed);
+    // dial the amplitude down to keep it calm
+    float displacement = sinenoise(vec4(position, uTime), uv, (uAmplitude * 0.05), uAnimationSpeed);
 
     vec3 newPosition = position;
     newPosition.z += displacement;
