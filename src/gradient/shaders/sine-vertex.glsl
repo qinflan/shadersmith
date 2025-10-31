@@ -14,7 +14,7 @@ float sinenoise(vec4 x, vec2 uv, float uAmplitude, float uAnimationSpeed) {
 
   // loop angle creation to generate uniquely twisting ridges 
   for (float i = 0.0; i < n; i++) {
-      a += cos(float(i) - d - a * position.x * 0.5 + phase);
+      a += cos(float(i) - d - a * position.x * 0.3 + phase);
       d += sin(float(i) * 0.5 + phase);
   }
 

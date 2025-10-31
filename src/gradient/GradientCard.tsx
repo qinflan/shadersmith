@@ -7,7 +7,7 @@ import { Suspense } from "react"
 import { GradientScene } from "./GradientCanvas"
 
 const GradientCard = () => {
-    const { isSandboxMode, setIsSandboxMode } = useControls()
+    const { isSandboxMode, setIsSandboxMode } = useControls();
 
   return (
     <div className="relative w-full flex flex-col gap-4 items-center">

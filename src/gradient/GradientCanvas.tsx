@@ -79,6 +79,7 @@ function GradientMesh() {
         <mesh ref={meshRef}>
             <planeGeometry args={[50, 50, 300, 300]} />
             <shaderMaterial
+                key={presetOption}
                 ref={materialRef}
                 vertexShader={presetOption === "valley" ? vertexShader : sineVertexShader}
                 fragmentShader={fragmentShader}
