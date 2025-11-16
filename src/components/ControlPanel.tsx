@@ -217,9 +217,9 @@ const ControlPanel = () => {
                 </div>
             </CardContent>
 
-            <CardFooter>
+            {/* <CardFooter>
                 <Button className="mt-2 w-full"> Create Code Block</Button>
-            </CardFooter>
+            </CardFooter> */}
         </Card>
 
     )
