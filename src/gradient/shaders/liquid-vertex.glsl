@@ -44,8 +44,8 @@ float sinenoise(vec4 x, vec2 uv, float uAmplitude, float uAnimationSpeed) {
 
 void main() {
     vec2 uv = position.xy;
-
-    float displacement = sinenoise(vec4(position, uTime), uv, (uAmplitude * 0.05), uAnimationSpeed);
+    // bit hacky but amplitude is more sensitive on this shader preset so scaling it down works
+    float displacement = sinenoise(vec4(position, uTime), uv, (uAmplitude * 0.004), uAnimationSpeed);
 
     vec3 newPosition = position;
     newPosition.z += displacement;
