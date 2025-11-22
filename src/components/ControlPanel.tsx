@@ -50,7 +50,7 @@ const ControlPanel = () => {
         <Card className="min-w-[275px] max-h-[485px]">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
-                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own customized 3D gradient art in real time.</CardDescription>
+                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build custom 3D gradient art in real time.</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -64,8 +64,8 @@ const ControlPanel = () => {
                         <RadioGroupItem value="liquid" id="preset-3" className="cursor-pointer" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="preset-3">dither</Label>
-                        <RadioGroupItem value="dither" id="preset-3" className="cursor-pointer" />
+                        <Label htmlFor="preset-3">gloss</Label>
+                        <RadioGroupItem value="gloss" id="preset-3" className="cursor-pointer" />
                     </div>
                 </RadioGroup>
             </CardContent>
