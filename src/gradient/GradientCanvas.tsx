@@ -27,7 +27,7 @@ function GradientMesh() {
         new THREE.Vector4(),
     ]);
 
-    const initialColorVectors = colorVectors.current.map((v, i) => {
+    const initialColorVectors = colorVectors.current.map((_, i) => {
 
     // @ts-expect-error due to looking up index as a string and not type, but works
     const hsva = controlState[`hsva${i + 1}`];
