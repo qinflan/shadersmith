@@ -7,9 +7,9 @@ import GradientCard from './gradient/GradientCard'
 function App() {
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+    <div className="min-h-screen flex flex-col items-center bg-background">
       <Navbar />
-        <div className="flex mt-[150px] justify-center gap-10">
+        <div className="flex flex-col-reverse w-[90%] md:flex-row mt-[100px] md:mt-[150px] justify-center gap-10">
           <ControlPanel />
           <GradientCard />
       </div>

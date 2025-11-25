@@ -11,7 +11,7 @@ const GradientCard = () => {
 
   return (
     <div className="relative w-full flex flex-col gap-4 items-center">
-        <Card className="w-[50vw] max-w-[1000px] h-[485px] p-0 overflow-hidden">
+        <Card className="w-[100%] md:w-[50vw] max-w-[1000px] h-[485px] p-0 overflow-hidden">
           <CardContent className="w-full h-full p-0">
                     <Canvas className="w-full h-full" 
                       key={isSandboxMode ? "sandbox" : "preview"} 
