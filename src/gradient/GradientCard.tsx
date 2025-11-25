@@ -27,12 +27,14 @@ const GradientCard = () => {
       <Button 
         variant={isSandboxMode ? "outline" : "default"} 
         onClick={() => setIsSandboxMode(false)}
+        className="cursor-pointer"
         >
           preview
         </Button>
       <Button 
         variant={isSandboxMode ? "default" : "outline"} 
         onClick={() => setIsSandboxMode(true)}
+        className="cursor-pointer"
         >
           sandbox
         </Button>

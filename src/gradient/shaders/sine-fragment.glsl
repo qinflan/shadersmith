@@ -1,13 +1,34 @@
-uniform vec4 uColors[5]; // array of colors
+precision highp float;
+
+uniform float uAmplitude;
+uniform float uTime;
+uniform vec4 uColors[5];
 uniform float uGrain;
 
-varying float vHeight; // passed z displacement for vertices from vertex shader
+varying vec2 vUv;
 
-void main() {
-    float t = (vHeight + 10.0) / 20.0;
-    t = clamp(t, 0.0, 1.0);
-    vec4 color;
 
+void main () {
+    vec2 uv = (vUv - 0.5) * 2.0;
+
+    float d = -uTime * 0.4;
+    float a = 0.0;
+
+    for (float i = 0.0; i < 8.0; i++) {
+        a += cos(i - d - a * uv.x);
+        d += sin(uv.y * i + a);
+    }
+
+    d += uTime * 0.6;
+
+    // shader is sensitive to amplitude so scale it down, bit hacky and need to be refactored
+    float minimizedAmplitude = uAmplitude * 0.02;
+    float val = cos(a * 0.3 + d * minimizedAmplitude);
+
+    // normalize intensity
+    float t = (val + 1.0) * 0.5;
+
+    vec4 color; 
 
     if (t < 0.25) {
         float f = t / 0.25;
@@ -24,4 +45,5 @@ void main() {
     }
 
     gl_FragColor = color;
+
 }

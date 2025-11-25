@@ -2,10 +2,12 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import type { OrbitControlsProps } from '@react-three/drei'
-
 import vertexShader from './shaders/vertex.glsl'
-import sineVertexShader from './shaders/sine-vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
+import liquidVertexShader from './shaders/liquid-vertex.glsl'
+import liquidFragmentShader from './shaders/liquid-fragment.glsl'
+import sineVertexShader from './shaders/sine-vertex.glsl'
+import sineFragmentShader from './shaders/sine-fragment.glsl'
 import { useControls } from '@/hooks/ControlStore'
 import { hsvaToRgba } from '@uiw/color-convert'
 import * as THREE from 'three'
@@ -74,6 +76,17 @@ function GradientMesh() {
         })
     })
 
+    let vertexShaderToUse = vertexShader;
+    let fragmentShaderToUse = fragmentShader;
+    
+    if (presetOption === "liquid") {
+        vertexShaderToUse = liquidVertexShader
+        fragmentShaderToUse = liquidFragmentShader
+    } else if (presetOption === "gloss") {
+        fragmentShaderToUse = sineFragmentShader
+        vertexShaderToUse = sineVertexShader
+    }
+
     // return 3D gradient mesh
     return (
         <mesh ref={meshRef}>
@@ -81,8 +94,8 @@ function GradientMesh() {
             <shaderMaterial
                 key={presetOption}
                 ref={materialRef}
-                vertexShader={presetOption === "valley" ? vertexShader : sineVertexShader}
-                fragmentShader={fragmentShader}
+                vertexShader={vertexShaderToUse}
+                fragmentShader={fragmentShaderToUse}
                 uniforms={uniformsRef.current}
             />
         </mesh>

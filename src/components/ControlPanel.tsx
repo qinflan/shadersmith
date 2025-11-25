@@ -50,22 +50,22 @@ const ControlPanel = () => {
         <Card className="min-w-[275px] max-h-[485px]">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
-                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build your own customized 3D gradient art in real time.</CardDescription>
+                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build custom 3D gradient art in real time.</CardDescription>
             </CardHeader>
 
             <CardContent>
                 <RadioGroup defaultValue={preset} className="flex gap-6 items-center" onValueChange={(value) => setPreset(value)}>
                     <div className="flex flex-col items-center gap-2">
                         <Label htmlFor="preset-1">valley</Label>
-                        <RadioGroupItem value="valley" id="preset-1" />
+                        <RadioGroupItem value="valley" id="preset-1" className="cursor-pointer" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
                         <Label htmlFor="preset-2">liquid</Label>
-                        <RadioGroupItem value="liquid" id="preset-3" />
+                        <RadioGroupItem value="liquid" id="preset-3" className="cursor-pointer" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="preset-3">sine</Label>
-                        <RadioGroupItem value="sine" id="preset-3" />
+                        <Label htmlFor="preset-3">gloss</Label>
+                        <RadioGroupItem value="gloss" id="preset-3" className="cursor-pointer" />
                     </div>
                 </RadioGroup>
             </CardContent>
@@ -77,6 +77,7 @@ const ControlPanel = () => {
                         value={[amplitude]}
                         onValueChange={(val) => setAmplitude(val[0])}
                         step={1}
+                        className="cursor-pointer"
                     />
                 </div>
                 <div className="flex flex-col">
@@ -87,6 +88,7 @@ const ControlPanel = () => {
                         min={0}
                         max={1}
                         step={0.05}
+                        className="cursor-pointer"
                     />
                 </div>
 
@@ -96,6 +98,7 @@ const ControlPanel = () => {
                         value={[grain]}
                         onValueChange={(val) => setGrain(val[0])}
                         step={1}
+                        className="cursor-pointer"
                     />
                 </div>
             </CardContent>
@@ -105,7 +108,7 @@ const ControlPanel = () => {
 
                 <div className="flex items-center gap-2">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="rounded-md">
+                        <DropdownMenuTrigger className="rounded-md cursor-pointer">
                             <div className="rounded-md border-border border-1" style={{ width: 25, height: 25, background: hsvaToHex(hsva1) }}></div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -127,7 +130,7 @@ const ControlPanel = () => {
                     </DropdownMenu>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="rounded-md">
+                        <DropdownMenuTrigger className="rounded-md cursor-pointer">
                             <div className="rounded-md border-border border-1" style={{ width: 25, height: 25, background: hsvaToHex(hsva2) }}></div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -149,7 +152,7 @@ const ControlPanel = () => {
                     </DropdownMenu>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="rounded-md">
+                        <DropdownMenuTrigger className="rounded-md cursor-pointer">
                             <div className="rounded-md border-border border-1" style={{ width: 25, height: 25, background: hsvaToHex(hsva3) }}></div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -171,7 +174,7 @@ const ControlPanel = () => {
                     </DropdownMenu>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="rounded-md">
+                        <DropdownMenuTrigger className="rounded-md cursor-pointer">
                             <div className="rounded-md border-border border-1" style={{ width: 25, height: 25, background: hsvaToHex(hsva4) }}></div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -193,7 +196,7 @@ const ControlPanel = () => {
                     </DropdownMenu>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="rounded-md">
+                        <DropdownMenuTrigger className="rounded-md cursor-pointer">
                             <div className="rounded-md border-border border-1" style={{ width: 25, height: 25, background: hsvaToHex(hsva5) }}></div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -218,7 +221,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button className="mt-2 w-full"> Create Code Block</Button>
+                <Button className="mt-2 w-full cursor-pointer"> generate code block</Button>
             </CardFooter>
         </Card>
 

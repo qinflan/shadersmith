@@ -13,6 +13,9 @@ function App() {
           <ControlPanel />
           <GradientCard />
       </div>
+          <div className="mt-[50px] mb-[50px]">
+            <p className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">this is a demo, npm package + code generation for art coming soon...</p>
+          </div>
     </div>
   )
 }
