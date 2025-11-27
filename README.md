@@ -3,9 +3,9 @@
 This project allows users to create procedurally generated fluid 3D gradient art using react-three-fiber and custom GLSL shaders.
 
 Currently there are three supported presets:
-  - Valley mode (utilizes a simplex noise algorithm to create a lava lamp effect)
-  - Liquid mode (utilizes sin/cos functions to create procedural, curvy ripples that resemble liquid)
-  - Gloss (Also uses sin/cos functions but in fragment shader, with no vertex deformatin).
+  - Valley: simplex noise algorithm to create a lava lamp effect
+  - Liquid: sin/cos functions to create procedural, curvy ripples that resemble liquid
+  - Gloss: also uses sin/cos functions but in fragment shader, with no vertex deformation
 
 Currently I am working on an npm package that will make it possible to customize the gradient art in the react web app, which will generate a code block that can be used in you React web application for background art. This is in progress.
 
