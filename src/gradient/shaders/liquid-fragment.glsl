@@ -10,6 +10,11 @@ uniform float uGrain;
 
 varying float vHeight;
 
+// noise function for grain
+float rand(vec2 co) {
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
 float fresnel(vec3 viewDir, vec3 normal, float bias, float scale, float power) {
   return bias + scale * pow(1.0 - dot(viewDir, normal), power);
 }
@@ -17,21 +22,6 @@ float fresnel(vec3 viewDir, vec3 normal, float bias, float scale, float power) {
 float specularStrength(vec3 lightDir, vec3 viewDir, vec3 normal, float shininess) {
   vec3 halfDir = normalize(lightDir + viewDir);
   return pow(max(dot(normal, halfDir), 0.0), shininess);
-}
-
-float hash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-}
-
-float noise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-  float a = hash(i);
-  float b = hash(i + vec2(1.0, 0.0));
-  float c = hash(i + vec2(0.0, 1.0));
-  float d = hash(i + vec2(1.0, 1.0));
-  vec2 u = f * f * (3.0 - 2.0 * f);
-  return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
 }
 
 void main() {
@@ -57,10 +47,19 @@ void main() {
   float metalness = clamp(uMetalness, 0.0, 1.0);
   float fres = fresnel(viewDir, normal, 0.02, 1.0, 5.0);
 
-  float grain = noise(gl_FragCoord.xy * uGrain + uTime * 0.3) * 0.1;
+  vec2 grainUV = gl_FragCoord.xy;
+  float g = rand(grainUV);
+  float prob = clamp(uGrain * 0.02, 0.0, 1.0);
+  float grainAmount = 0.0;
 
-  vec3 color = baseColor * (0.7 + 0.3 * fres) + spec * 1.5 + grain;
+  // only some pixels get grain
+  if (g < prob) {
+      grainAmount = (rand(grainUV + 1.0) - 0.5) * 0.05;
+  }
+
+  vec3 color = baseColor * (0.7 + 0.3 * fres) + spec * 1.5;
   color = mix(baseColor, color, metalness);
+  color.rgb += grainAmount;
 
   gl_FragColor = vec4(color, 1.0);
 }

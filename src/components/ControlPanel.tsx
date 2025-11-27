@@ -81,7 +81,7 @@ const ControlPanel = () => {
                     />
                 </div>
                 <div className="flex flex-col">
-                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">animation Speed</p>
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">animation speed</p>
                     <Slider
                         value={[animationSpeed]}
                         onValueChange={(val) => setAnimationSpeed(val[0])}
