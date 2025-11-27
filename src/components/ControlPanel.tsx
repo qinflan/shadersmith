@@ -72,7 +72,7 @@ const ControlPanel = () => {
 
             <CardContent className="flex flex-col gap-3">
                 <div className="flex flex-col">
-                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Amplitude</p>
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">amplitude</p>
                     <Slider
                         value={[amplitude]}
                         onValueChange={(val) => setAmplitude(val[0])}
@@ -81,7 +81,7 @@ const ControlPanel = () => {
                     />
                 </div>
                 <div className="flex flex-col">
-                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Animation Speed</p>
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">animation Speed</p>
                     <Slider
                         value={[animationSpeed]}
                         onValueChange={(val) => setAnimationSpeed(val[0])}
@@ -93,7 +93,7 @@ const ControlPanel = () => {
                 </div>
 
                 <div className="flex flex-col">
-                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">Grain</p>
+                    <p className="font-['helvetica-neue-lt-pro'] text-left text-sm text-primary mb-2 tracking-wide">grain</p>
                     <Slider
                         value={[grain]}
                         onValueChange={(val) => setGrain(val[0])}
@@ -104,7 +104,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardContent>
-                <p className="font-['helvetica-neue-lt-pro'] text-sm text-left text-primary mb-2 tracking-wide">Color Select</p>
+                <p className="font-['helvetica-neue-lt-pro'] text-sm text-left text-primary mb-2 tracking-wide">color select</p>
 
                 <div className="flex items-center gap-2">
                     <DropdownMenu>
