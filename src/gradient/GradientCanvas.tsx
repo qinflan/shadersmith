@@ -29,7 +29,7 @@ function GradientMesh() {
 
     const initialColorVectors = colorVectors.current.map((_, i) => {
 
-    // @ts-expect-error due to looking up index as a string and not type, but works
+    // @ts-expect-error due to looking up index as a string and not type, but sloppy works 2
     const hsva = controlState[`hsva${i + 1}`];
     const { r, g, b, a } = hsvaToRgba(hsva);
     return new THREE.Vector4(r / 255, g / 255, b / 255, a);
@@ -88,9 +88,10 @@ function GradientMesh() {
     }
 
     // return 3D gradient mesh
+    // TODO: create state vars for this geometry so we can accept as args in package
     return (
         <mesh ref={meshRef}>
-            <planeGeometry args={[50, 50, 300, 300]} />
+            <planeGeometry args={[50, 35, 400, 400]} />
             <shaderMaterial
                 key={presetOption}
                 ref={materialRef}
