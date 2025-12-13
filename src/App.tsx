@@ -13,9 +13,6 @@ function App() {
           <ControlPanel />
           <GradientCard />
       </div>
-          <div className="p-[50px] w-screen bg-background">
-            <p className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">this is a demo, npm package + code generation for art coming soon...</p>
-          </div>
     </div>
   )
 }

@@ -221,7 +221,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button className="mt-2 w-full cursor-pointer"> generate code block</Button>
+                <Button variant="outline" className="mt-2 w-full cursor-pointer"> in progress... </Button>
             </CardFooter>
         </Card>
 

@@ -6,6 +6,9 @@ import { Canvas } from "@react-three/fiber"
 import { Suspense, useRef } from "react"
 import { GradientScene } from "./GradientCanvas"
 import { GoScreenFull } from "react-icons/go";
+import { TbViewportWide } from "react-icons/tb";
+import { PiCube } from "react-icons/pi";
+
 
 interface FullscreenElement extends HTMLDivElement {
   webkitRequestFullscreen?: () => Promise<void> | void;
@@ -49,6 +52,7 @@ const GradientCard = () => {
           className="cursor-pointer"
         >
           preview
+          <TbViewportWide />
         </Button>
         <Button
           variant={isSandboxMode ? "default" : "outline"}
@@ -56,12 +60,14 @@ const GradientCard = () => {
           className="cursor-pointer"
         >
           sandbox
+          <PiCube />
         </Button>
         <Button
           variant="outline"
           onClick={() => toggleFullscreen()}
           className="cursor-pointer"
         >
+          fullscreen
           <GoScreenFull />
         </Button>
       </ButtonGroup>
