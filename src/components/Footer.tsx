@@ -1,3 +1,4 @@
+
 const Footer = () => {
   return (
     <div className="flex h-[80px] bg-background w-full items-center justify-center border border-border">
@@ -9,8 +10,9 @@ const Footer = () => {
           className="underline hover:text-foreground transition-colors"
         >
           repository
-        </a>, and give a star!
+        </a>, give it a star
       </h2>
+      <img width={40} src="../src/assets/star.svg" />
     </div>
   )
 }

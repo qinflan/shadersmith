@@ -569,7 +569,7 @@ export const CodeBlockContent = ({
   children,
   themes = {
     light: 'github-light',
-    dark: 'kanagawa-dragon',
+    dark: 'vesper',
   },
   language = 'typescript',
   syntaxHighlighting = true,

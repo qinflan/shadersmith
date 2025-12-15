@@ -73,11 +73,12 @@ ${colors.map(c => `       [${c.join(", ")}],`).join("\n")}
 
             <CodeBlock data={installPeerDeps} defaultValue={code[0].language} className="text-left">
                 <CodeBlockHeader>
+                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none pl-3">install peer dependencies</p>
                     <CodeBlockCopyButton
+                        className="ml-auto cursor-pointer"
                         onCopy={() => console.log('Copied code to clipboard')}
                         onError={() => console.error('Failed to copy code to clipboard')}
                     />
-                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none">install peer dependencies</p>
                 </CodeBlockHeader>
                 <CodeBlockBody>
                     {(item) => (
@@ -92,11 +93,12 @@ ${colors.map(c => `       [${c.join(", ")}],`).join("\n")}
 
             <CodeBlock data={installCommand} defaultValue={code[0].language} className="text-left">
                 <CodeBlockHeader>
+                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none pl-3">install package</p>
                     <CodeBlockCopyButton
+                        className="ml-auto cursor-pointer"
                         onCopy={() => console.log('Copied code to clipboard')}
                         onError={() => console.error('Failed to copy code to clipboard')}
                     />
-                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none">install package</p>
                 </CodeBlockHeader>
                 <CodeBlockBody>
                     {(item) => (
@@ -111,11 +113,12 @@ ${colors.map(c => `       [${c.join(", ")}],`).join("\n")}
 
             <CodeBlock data={importCode} defaultValue={code[0].language} className="text-left">
                 <CodeBlockHeader>
+                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none pl-3">import package</p>
                     <CodeBlockCopyButton
+                        className="ml-auto cursor-pointer"
                         onCopy={() => console.log('Copied code to clipboard')}
                         onError={() => console.error('Failed to copy code to clipboard')}
                     />
-                    <p className="font-[Inter] text-left text-wrap tracking-tight text-foreground select-none">import package</p>
                 </CodeBlockHeader>
                 <CodeBlockBody>
                     {(item) => (
@@ -138,6 +141,7 @@ ${colors.map(c => `       [${c.join(", ")}],`).join("\n")}
                         )}
                     </CodeBlockFiles>
                     <CodeBlockCopyButton
+                        className="cursor-pointer"
                         onCopy={() => console.log('Copied code to clipboard')}
                         onError={() => console.error('Failed to copy code to clipboard')}
                     />

@@ -96,8 +96,8 @@ const Instructions = () => {
         </div>
         
         <div className="md:flex hidden mt-20 items-center gap-3">
-        <p className="font-[Inter] text-lg text-left text-wrap tracking-tighter text-foreground select-none max-w-[600px]">
-          Copy and paste <span className="underline font-bold">your custom gradient art</span> from the snippet to the right
+        <p className="font-[Inter] text-lg text-left text-wrap tracking-tighter text-muted-foreground select-none max-w-[600px]">
+          Copy and paste your <span className="font-bold text-foreground">custom gradient</span> from the snippet
         </p>
         <FaArrowRight />
         </div>
