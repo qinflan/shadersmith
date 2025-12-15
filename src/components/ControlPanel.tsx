@@ -23,6 +23,8 @@ import { hsvaToHex } from '@uiw/color-convert';
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
+import { IoCodeSlash } from "react-icons/io5";
+
 
 const ControlPanel = () => {
     const {
@@ -50,7 +52,7 @@ const ControlPanel = () => {
         <Card className="min-w-[275px] max-h-[485px]">
             <CardHeader className="text-left">
                 <CardTitle className="font-['helvetica-neue-lt-pro'] text-2xl font-normal tracking-tight">parameters</CardTitle>
-                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build custom 3D gradient art in real time.</CardDescription>
+                <CardDescription className="font-['helvetica-neue-lt-pro'] tracking-wide">build custom animated gradient art in real time.</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -221,7 +223,10 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardFooter>
-                <Button variant="outline" className="mt-2 w-full cursor-pointer"> in progress... </Button>
+                <Button variant="outline" className="mt-2 w-full cursor-pointer" onClick={() => {document.getElementById('code-guide')?.scrollIntoView({ behavior: 'smooth' });}}> 
+                    <IoCodeSlash /> 
+                    Develop your Art
+                </Button>
             </CardFooter>
         </Card>
 

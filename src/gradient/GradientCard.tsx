@@ -30,9 +30,11 @@ const GradientCard = () => {
   }
 
   return (
-    <div className="relative flex flex-col gap-4 items-center">
+    <div className="relative flex w-full flex-col gap-4 flex-grow items-center">
       <Card ref={cardRef} className=
-          "w-[100%] md:w-[50vw] max-w-[1000px] h-[485px] p-0 overflow-hidden"
+          "w-full h-[485px] p-0 overflow-hidden"
+          // fixes re-layout on escape fullscreen, kinda hacky
+          style={{ contain: "layout size" }}
       >
         <CardContent className="w-full h-full p-0">
           <Canvas className="w-full h-full"
