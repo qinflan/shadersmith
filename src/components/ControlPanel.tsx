@@ -106,7 +106,7 @@ const ControlPanel = () => {
             </CardContent>
 
             <CardContent>
-                <p className="font-['helvetica-neue-lt-pro'] text-sm text-left text-primary mb-2 tracking-wide">color select</p>
+                <p className="font-['helvetica-neue-lt-pro'] text-sm text-left text-primary mb-2 tracking-wide">colors</p>
 
                 <div className="flex items-center gap-2">
                     <DropdownMenu>

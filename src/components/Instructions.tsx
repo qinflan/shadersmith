@@ -39,7 +39,7 @@ const Instructions = () => {
             }
           >
             <ImGithub />
-            github
+            GitHub
           </Button>
         </div>
 

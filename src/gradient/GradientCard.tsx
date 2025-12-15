@@ -53,24 +53,24 @@ const GradientCard = () => {
           onClick={() => setIsSandboxMode(false)}
           className="cursor-pointer"
         >
-          preview
           <TbViewportWide />
+          Preview
         </Button>
         <Button
           variant={isSandboxMode ? "default" : "outline"}
           onClick={() => setIsSandboxMode(true)}
           className="cursor-pointer"
         >
-          sandbox
           <PiCube />
+          Sandbox
         </Button>
         <Button
           variant="outline"
           onClick={() => toggleFullscreen()}
           className="cursor-pointer"
         >
-          fullscreen
           <GoScreenFull />
+          Fullscreen
         </Button>
       </ButtonGroup>
     </div>
