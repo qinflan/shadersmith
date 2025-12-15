@@ -1,3 +1,4 @@
+import star from "@/assets/star.svg"
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
           repository
         </a>, give it a star
       </h2>
-      <img width={40} src="../src/assets/star.svg" />
+      <img width={40} src={star} />
     </div>
   )
 }
