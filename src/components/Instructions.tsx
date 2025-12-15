@@ -14,7 +14,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const Instructions = () => {
   return (
-    <div className="flex mt-40 pt-30 pb-20 items-stretch gap-20" id="code-guide">
+    <div className="flex flex-col md:flex-row mt-10 md:mt-30 md:pt-30 pb-20 items-center md:items-stretch gap-20" id="code-guide">
       <div className="flex flex-col gap-8 w-full">
         <h1 className="text-left w-full font-['articulat-cf'] tracking-tight text-foreground select-none">installation / usage</h1>
         <p className="font-[Inter] text-xl text-left text-wrap tracking-tighter text-foreground select-none max-w-[600px]">
@@ -95,7 +95,7 @@ const Instructions = () => {
           </Table>
         </div>
         
-        <div className="mt-20 flex items-center gap-3">
+        <div className="md:flex hidden mt-20 items-center gap-3">
         <p className="font-[Inter] text-lg text-left text-wrap tracking-tighter text-foreground select-none max-w-[600px]">
           Copy and paste <span className="underline font-bold">your custom gradient art</span> from the snippet to the right
         </p>
