@@ -17,6 +17,9 @@
 **You can find a sandbox for creating totally custom 3D and 2D gradient art to use in your React applications! The app currently supports 3 preset modes (valley, liquid, gloss) which correspond to specific shader pairs that will render your component.**
 <br>
 <br>
+**Toggle between presets and use the control panel to customize an animated gradient. There is also a 3D mode to view any vertex deformations in 3D with orbit controls.**
+<br>
+<br>
 *There is a guide on installation and usage documented in the npm package and on the web app*
 <br>
 <br>
