@@ -2,8 +2,8 @@ import star from "@/assets/star.svg"
 
 const Footer = () => {
   return (
-    <div className="flex h-[80px] bg-background w-full items-center justify-center border border-border">
-      <h2 className="font-[Inter] text-lg text-muted-foreground font-regular tracking-tighter select-none">
+    <div className="flex h-[60px] bg-background w-full items-center justify-center border-t border-border">
+      <h2 className="font-[Inter] text-md text-muted-foreground font-regular tracking-tighter select-none">
         check out the <a
           href="https://github.com/qinflan/shadersmith-r3f"
           target="_blank"
@@ -13,7 +13,7 @@ const Footer = () => {
           repository
         </a>, give it a star
       </h2>
-      <img width={40} src={star} />
+      <img width={34} src={star} />
     </div>
   )
 }
